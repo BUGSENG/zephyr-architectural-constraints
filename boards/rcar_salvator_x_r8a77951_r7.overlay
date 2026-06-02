@@ -1,0 +1,13 @@
+/ {
+    chosen {
+        zephyr,uart-pipe = &scif1;
+        zephyr,display = &dummy_display;
+    };
+
+    dummy_display: dummy_display {
+        compatible = "zephyr,dummy-dc"; /* Use 'dummy-dc' instead of 'dummy-display' */
+        status = "okay";
+        width = <320>;
+        height = <240>;
+    };
+};
