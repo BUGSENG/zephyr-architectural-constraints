@@ -1,0 +1,23 @@
+/ {
+    chosen {
+        /* Map the uart-pipe to the available scif2 interface */
+        zephyr,uart-pipe = &scif2;
+
+        /* If LVGL still gives you a display error, keep this dummy target enabled */
+        zephyr,display = &dummy_display;
+    };
+
+    dummy_display: dummy_display {
+        compatible = "zephyr,dummy-dc";
+        status = "okay";
+        width = <320>;
+        height = <240>;
+    };
+};
+
+/* Explicitly enable the secondary serial interface */
+&scif2 {
+    status = "okay";
+    pinctrl-0 = <&scif2_data_a_tx_default &scif2_data_a_rx_default>;
+    pinctrl-names = "default";
+};

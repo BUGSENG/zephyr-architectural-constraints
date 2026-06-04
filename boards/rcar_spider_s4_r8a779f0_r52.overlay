@@ -1,0 +1,24 @@
+/ {
+    chosen {
+        /* Keep your working UART pipe configuration */
+        zephyr,uart-pipe = &scif3;
+
+        /* Fixes the LVGL error by giving it a fake display target */
+        zephyr,display = &dummy_display;
+    };
+
+    /* Creates the virtual dummy display device */
+    dummy_display: dummy_display {
+        compatible = "zephyr,dummy-dc";
+        status = "okay";
+        width = <320>;
+        height = <240>;
+    };
+};
+
+/* Keep your active serial interface */
+&scif3 {
+    status = "okay";
+    pinctrl-0 = <&scif3_data_tx_default &scif3_data_rx_default>;
+    pinctrl-names = "default";
+};
